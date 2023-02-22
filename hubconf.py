@@ -23,8 +23,8 @@ classes = [
 
 # Define model
 class NeuralNetwork(nn.Module):
-    def _init_(self):
-        super(NeuralNetwork, self)._init_()
+    def __init__(self):
+        super(NeuralNetwork, self).__init__()
         self.flatten = nn.Flatten()
         self.linear_relu_stack = nn.Sequential(
             nn.Linear(28*28, 512),
@@ -38,6 +38,8 @@ class NeuralNetwork(nn.Module):
         x = self.flatten(x)
         logits = self.linear_relu_stack(x)
         return logits
+
+#############################
 
 def get_lossfn_and_optimizer(mymodel):
     loss_fn = nn.CrossEntropyLoss()
@@ -65,6 +67,7 @@ def load_data():
     
     return training_data, test_data
 
+#############################
 
 def create_dataloaders(training_data, test_data, batch_size=64):
 
@@ -79,6 +82,7 @@ def create_dataloaders(training_data, test_data, batch_size=64):
         
     return train_dataloader, test_dataloader
   
+#############################
 
 def get_model():
     
@@ -145,4 +149,7 @@ def sample_test(model1, test_data):
     with torch.no_grad():
         pred = model1(x)
         predicted, actual = classes[pred[0].argmax(0)], classes[y]
-        print(f'Predicted: "{predicted}", Actual: "{actual}"')
+        print(f'Predicted: "{predicted}", Actual: "{actual}"')
+        
+        
+        
